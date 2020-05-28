@@ -32,6 +32,7 @@ palta persona = persona {
 }
 ```
 
+#### ¡Quiero mi menú!
 ¿Puedo tener una lista de comidas? Sí, claro:
 
 ```hs
@@ -48,10 +49,15 @@ almorzar :: Persona -> Persona
 almorzar persona = foldr ($) persona almuerzo
 ```
 
+#### Pero pero peeeeero
 Comer es una acción intrínseca a la comida, no puedo hacer otra cosa: las comidas no se pueden comparar, ni podemos acceder a información de una comida (ingredientes, o calorías que genera).
 
-La ventaja principal es en lo didáctico: para poder comer necesitamos tener aplicación parcial y orden superior. 
+#### ¿Ventajas?
+La ventaja principal es en lo didáctico:
+- Modelar con funciones ¡es pensar en funcional!
+- Además, para poder comer necesitamos tener aplicación parcial y orden superior, así que de paso estamos repasando esos temas.
 
+#### ¿Y el locro?
 Cuando aparece una nueva comida, eso no afecta lo que construimos anteriormente, solo se escribe una nueva función y eso nos sirve para incorporarla a cualquier almuerzo.
 
 ## Segunda variante: múltiples constructores
@@ -77,8 +83,10 @@ comer (Palta) persona = persona {
 }
 ```
 
+#### ¿Ventajas?
 Separamos aquí el dato comida vs. la acción de comer. Tenemos información sobre la comida (kilos, ingredientes), podemos comparar las comidas, e incluso tener acciones diferentes (comer, endulzar, mejorar, etc.)
 
+#### ¡Quiero mi menú!
 Podemos tener una lista de comidas también: 
 
 ```hs
@@ -92,9 +100,11 @@ almorzar' :: Persona -> Persona
 almorzar' persona = foldr comer persona almuerzo'
 ```
 
+#### Pero pero peeeeero
 No aparece la aplicación parcial (estás construyendo valores simplemente), el orden superior necesita que no construyas una función recursiva donde solamente apliques la función comer.
 
-Cuando aparece una nueva comida, eso requiere ir a modificar cada una de las funciones que trabajan sobre la comida: comer, endulzar, mejorar, etc.
+#### ¿Y el locro?
+Cuando aparece una nueva comida, eso requiere ir a modificar cada una de las funciones que trabajan sobre la comida: comer, endulzar, mejorar, etc. Esto no es una desventaja, sino algo que se desglosa de la ventaja de poder tener distintas operaciones con las comidas y no sólo la operación "comer", como en el caso de modelar con funciones. 
 
 Más información en [este artículo](http://wiki.uqbar.org/wiki/articles/data--definiendo-nuestros-tipos-en-haskell.html)
 
@@ -132,6 +142,10 @@ instance Comida'' Palta'' where
   }
 ```
 
+#### ¿Y el locro?
+Agregar una nueva comida se hace fácilmente: se agrega un `data Locro` y después un `instance Comida Locro`, implementando el `comer''` como en el ejemplo de arriba. Incluso se puede agregar el Locro en otro archivo, como al modelar con funciones.
+
+#### PEERO PEERO PEEEEEERO ¡No es un tipo!
 Ojo, porque la comida **no es un tipo**, sino un agrupador de diferentes tipos. Esto significa que la palta podría tener funciones específicas mientras que la ensalada podría tener otras. Si queremos tener funciones para cada tipo de comida, debemos escribirlas en el typeclass. Una ventaja sería que podríamos definir una función en la typeclass en base a otra:
 
 ```hs
@@ -144,7 +158,8 @@ class Comida'' a where
 
 Cada comida necesita un constructor específico, que es propio para el tipo: el constructor Ensalada define el tipo Ensalada, y nada más. 
 
-El primer problema se vuelve evidente cuando queremos tener una lista de comidas:
+#### Pero pero peeeero... No tengo menú
+El primer problema (la comida no es un tipo) se vuelve evidente cuando queremos tener una lista de comidas:
 
 ```hs
 comidas = [Palta'', Ensalada'' 5, Hamburguesa'' ["cheddar"]]
