@@ -1,13 +1,9 @@
 module Library
 where
 
---import PdePreludat
-import Data.List
-type Number = Float
---
+import PdePreludat
 
 type Kilos = Number
-
 type Ingrediente = String
 
 data Persona = Persona {
@@ -41,7 +37,7 @@ ensalada kilos persona = persona {
 -- el peso aumenta en 3 kilos * la cantidad de ingredientes
 hamburguesa :: [Ingrediente] -> Comida
 hamburguesa ingredientes persona = persona {
-  peso = peso persona + (3 * genericLength ingredientes),
+  peso = peso persona + (3 * length ingredientes),
   colesterol = colesterol persona * 1.5
 }
 
@@ -112,7 +108,7 @@ comer' (Ensalada kilos) persona = persona {
 -- el colesterol aumenta un 50%
 -- el peso aumenta en 3 kilos * la cantidad de ingredientes
 comer' (Hamburguesa ingredientes) persona = persona {
-  peso = peso persona + (3 * genericLength ingredientes),
+  peso = peso persona + (3 * length ingredientes),
   colesterol = colesterol persona * 1.5
 }
 
@@ -199,7 +195,7 @@ instance Comida'' Ensalada'' where
 -- el peso aumenta en 3 kilos * la cantidad de ingredientes
 instance Comida'' Hamburguesa'' where
   comer'' hamburguesa persona = persona {
-    peso = peso persona + (3 * genericLength (ingredientes hamburguesa)),
+    peso = peso persona + (3 * length (ingredientes hamburguesa)),
     colesterol = colesterol persona * 1.5
   }
 -- las hamburguesas son sabrosas cuando tienen cheddar
@@ -287,7 +283,7 @@ ensalada''' comida persona = persona {
 -- el peso aumenta en 3 kilos * la cantidad de ingredientes
 hamburguesa'''::FormaDeComer
 hamburguesa''' comida persona = persona {
-  peso = peso persona + (3 * genericLength (ingr comida)),
+  peso = peso persona + (3 * length (ingr comida)),
   colesterol = colesterol persona * 1.5
 }
 
@@ -339,7 +335,7 @@ disfrutar''' comida alguien = sobrepeso alguien || sabrosa''' comida
 --Nuevas formas de comer
 comidaLigth::FormaDeComer
 comidaLigth comida persona 
-  | genericLength (ingr comida) >= 2 = persona {peso = peso persona * 1.02}
+  | length (ingr comida) >= 2 = persona {peso = peso persona * 1.02}
   | otherwise = persona
 
 comidaInofensiva::FormaDeComer
