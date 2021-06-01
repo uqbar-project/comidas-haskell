@@ -1,6 +1,6 @@
 # Comidas - Ejercicio de modelado en Haskell
 
-[![Build Status](https://travis-ci.com/uqbar-project/comidas-haskell.svg?branch=master)](https://travis-ci.com/uqbar-project/comidas-haskell)
+[![build](https://github.com/uqbar-project/comidas-haskell/actions/workflows/build.yml/badge.svg)](https://github.com/uqbar-project/comidas-haskell/actions/workflows/build.yml)
 
 ## Enunciado
 
