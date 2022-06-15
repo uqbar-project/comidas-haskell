@@ -217,7 +217,7 @@ Hemos comparado las tres soluciones posibles para modelar comidas: si bien utili
 |----------|-------------|------|------|
 | Comer | es **la** función | necesita una función `comer` | necesita una función `comer` |
 | Puedo tener lista de comidas? | Sí, con aplicación parcial | Sí, múltiples constructores con diferentes parámetros (no hay aplicación parcial) | No, cada comida es un tipo distinto, no los puedo agrupar |
-| Comer muchas comidas | `foldr ($)` | `foldr comer` (la función comer específica) | | 
+| Comer muchas comidas | `foldr ($)` | `foldr comer` (la función comer específica) | N/A | 
 | Puedo comparar comidas | No | Sí, mediante una función custom o usando _deriving_ | No, `Ord` y `Eq` necesitan que los elementos sean del mismo tipo |
 | Puedo obtener información de la comida? | No | Sí, todo lo que forme parte del data | Sí, requiere definir funciones extra |
 | Repetir comida | `comida . comida` | se compone la función comer: ` (comer comida.comer comida)` | también se compone la función comer, se puede definir como implementación default en el typeclass (es una ventaja) |
