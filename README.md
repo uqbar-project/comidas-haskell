@@ -4,7 +4,16 @@
 
 ## Enunciado
 
-Queremos que la persona pueda comer distintas comidas: existen las ensaladas, las hamburguesas y las paltas, quiero comer las distintas cosas y cada cosa aporta distinto al comerla.
+Definimos una persona en base a indicadores nutricionales como el nivel de colesterol y su peso:
+
+```hs
+data Persona = Persona {
+  colesterol :: Number,
+  peso :: Kilos
+} deriving Show
+```
+
+Queremos que la persona pueda comer distintas comidas: existen las ensaladas, las hamburguesas y las paltas, cada alimento aporta diferentes cosas a la persona que la come.
 
 - una ensalada de x kilos aporta la mitad de peso para la persona y no agrega colesterol
 - cada hamburguesa tiene una cantidad de ingredientes: el colesterol aumenta un 50% para la persona y lo hace engordar en (3  * la cantidad de ingredientes) kilos
