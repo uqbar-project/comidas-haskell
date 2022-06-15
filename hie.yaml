@@ -1,2 +1,7 @@
 cradle:
   stack:
+    - path: "./src"
+      component: "comidas-haskell:lib"
+
+    - path: "./test"
+      component: "comidas-haskell:test:comidas-haskell-test"

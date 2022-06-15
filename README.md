@@ -191,7 +191,7 @@ es decir, colisionan la palta, la ensalada y la hamburguesa porque son de difere
 
 Por más que la palta y la ensalada deriven de Eq, no podemos asociarlas a variables del mismo tipo. Y lo propio pasa con los operadores de Ord: (<), (>), etc.
 
-El segundo problema es que estamos queriendo utilizar un concepto que fue pensado para otra cosa, que [no tiene que ver con modelar datos](https://www.reddit.com/r/haskell/comments/1j0awq/definitive_guide_on_when_to_use_typeclasses/). Incluso hay gente que piensa que es un antipattern hacer esto: [Haskell Antipattern: Existential Typeclass](https://lukepalmer.wordpress.com/2010/01/24/haskell-antipattern-existential-typeclass/)
+El segundo problema es que estamos queriendo utilizar un concepto que fue pensado para otra cosa, que [no tiene que ver con modelar datos](https://www.reddit.com/r/haskell/comments/1j0awq/definitive_guide_on_when_to_use_typeclasses/). Incluso hay gente que piensa que es un antipattern hacer esto: [Haskell Antipattern: Existential Typeclass](https://medium.com/@jonathangfischoff/existential-quantification-patterns-and-antipatterns-3b7b683b7d71)
 
 En definitiva, los typeclasses permiten agrupar tipos diferentes, y a nosotros nos conviene pensar en compartir todas las comidas con el mismo tipo.
 
