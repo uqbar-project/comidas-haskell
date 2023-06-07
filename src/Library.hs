@@ -11,12 +11,8 @@ data Persona = Persona {
   peso :: Kilos
 } deriving Show
 
-sobrepeso::Persona -> Bool
-sobrepeso alguien= peso alguien > 100
-
-grandote,chiquito::Persona
-grandote = Persona 150 150
-chiquito = Persona 60 60
+pesoPar :: Persona -> Bool
+pesoPar = even . peso
 
 --1) Queremos que la persona pueda comer distintas comidas. 
 -- Existen las ensaladas, las hamburguesas y las paltas, 
@@ -59,7 +55,7 @@ almorzar persona = foldr ($) persona almuerzo
 
 --2) Queremos que todas las comidas se puedan comer dos veces seguidas
 repetir:: Comida -> Persona -> Persona
-repetir comida = comida.comida 
+repetir comida = comida.comida
 
 --3) Queremos ver si un almuerzo contiene una comida dada
 --contieneComida::Comida -> [Comida]->Bool
@@ -72,7 +68,7 @@ repetir comida = comida.comida
 -- No podemos hacerlo
 
 --5) Queremos averiguar si una comida va a ser disfrutada por alguien.
--- Para quienes pesan más de 100 kg, todas las comidas son disfrutadas, 
+-- Para quienes pesan una cantidad par, todas las comidas son disfrutadas, 
 -- para los demás, solo son disfrutadas las comidas sabrosas
 -- Necesitamos nuevas funciones para disfrutar cada comida 
 -- (tal vez convenga renombrar las anteriores, x ej comerEnsalada en vez de ensalada)
@@ -94,11 +90,11 @@ disfrutarPalta _ = True
 -- quiero comer las distintas cosas y cada cosa aporta distinto 
 -- al comerla
 
--- una ensalada de x kilos aporta la mitad de peso para la persona
---     y no agrega colesterol
 data Comida' = Ensalada Kilos | Hamburguesa [Ingrediente] | Palta
   deriving (Eq, Ord, Show)
 
+-- una ensalada de x kilos aporta la mitad de peso para la persona
+--     y no agrega colesterol
 comer' :: Comida' -> Persona -> Persona
 comer' (Ensalada kilos) persona = persona {
   peso = peso persona + (kilos / 2)
@@ -140,16 +136,16 @@ sabrosa' :: Comida' -> Bool
 sabrosa' (Ensalada kilos) = kilos > 1
 
 -- las hamburguesas son sabrosas cuando tienen cheddar
-sabrosa' (Hamburguesa ingredientes) = elem "cheddar" ingredientes
+sabrosa' (Hamburguesa ingredientes) = "cheddar" `elem` ingredientes
 
 --las paltas son sabrosas
 sabrosa' Palta = True
 
 --5) Queremos averiguar si una comida va a ser disfrutada por alguien.
--- Para quienes pesan más de 100 kg, todas las comidas son disfrutadas, 
+-- Para quienes pesan una cantidad par, todas las comidas son disfrutadas, 
 -- para los demás, solo son disfrutadas las comidas sabrosas
 disfrutar' :: Comida' -> Persona -> Bool
-disfrutar' comida alguien = sobrepeso alguien || sabrosa' comida
+disfrutar' comida alguien = pesoPar alguien || sabrosa' comida
 
 
 
@@ -199,7 +195,7 @@ instance Comida'' Hamburguesa'' where
     colesterol = colesterol persona * 1.5
   }
 -- las hamburguesas son sabrosas cuando tienen cheddar
-  sabrosa'' hamburguesa = elem "cheddar" (ingredientes hamburguesa)
+  sabrosa'' hamburguesa = "cheddar" `elem` ingredientes hamburguesa
   --sabrosa'' = elem "cheddar".ingredientes
 
 -- la palta aumenta 2 kilos a quien la consume
@@ -208,7 +204,7 @@ instance Comida'' Palta'' where
     peso = peso persona + 2
   }
 --las paltas se repiten comiendolas tres veces  
-  repetir'' palta persona = (comer'' palta.comer'' palta.comer'' palta) persona 
+  repetir'' palta persona = (comer'' palta.comer'' palta.comer'' palta) persona
 --las paltas son sabrosas
   sabrosa'' _ = True
 
@@ -235,10 +231,10 @@ contieneComida'' comida comidas = elem comida comidas
 -- Resuelto en la definicion de la typeClass y cada data
 
 --5) Queremos averiguar si una comida va a ser disfrutada por alguien.
--- Para quienes pesan más de 100 kg, todas las comidas son disfrutadas, 
+-- Para quienes pesan una cantidad par, todas las comidas son disfrutadas, 
 -- para los demás, solo son disfrutadas las comidas sabrosas
 disfrutar'' :: Comida'' a => a -> Persona -> Bool
-disfrutar'' comida alguien = sobrepeso alguien || sabrosa'' comida
+disfrutar'' comida alguien = pesoPar alguien || sabrosa'' comida
 
 
 -- **************************************************************************
@@ -318,7 +314,7 @@ contieneComida''' comida comidas = elem comida comidas
 --Se debe agregar otra componente más al data con la correspondiente función
 --No necesariamente deben corresponderse con las formas de comer
 
-sabrosa''':: Comida''' -> Bool 
+sabrosa''':: Comida''' -> Bool
 sabrosa''' comida = (criterioSabroso comida) comida
 
 saborChedar, saborContundente, siempreSabroso::CriterioSabroso
@@ -327,14 +323,14 @@ saborContundente comida = kil comida > 1
 siempreSabroso _ = True
 
 --5) Queremos averiguar si una comida va a ser disfrutada por alguien.
--- Para quienes pesan más de 100 kg, todas las comidas son disfrutadas, 
+-- Para quienes pesan una cantidad par, todas las comidas son disfrutadas, 
 -- para los demás, solo son disfrutadas las comidas sabrosas
 disfrutar''' :: Comida''' -> Persona -> Bool
 disfrutar''' comida alguien = sobrepeso alguien || sabrosa''' comida
 
 --Nuevas formas de comer
 comidaLigth::FormaDeComer
-comidaLigth comida persona 
+comidaLigth comida persona
   | length (ingr comida) >= 2 = persona {peso = peso persona * 1.02}
   | otherwise = persona
 
@@ -342,4 +338,4 @@ comidaInofensiva::FormaDeComer
 comidaInofensiva _ p = p
 
 cambiarFormaDeComer::FormaDeComer->Comida'''->Comida'''
-cambiarFormaDeComer forma comida = comida {formaDeComer = forma} 
+cambiarFormaDeComer forma comida = comida {formaDeComer = forma}
