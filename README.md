@@ -15,7 +15,7 @@ data Persona = Persona {
 
 Queremos que la persona pueda comer distintas comidas: existen las ensaladas, las hamburguesas y las paltas, cada alimento aporta diferentes cosas a la persona que la come.
 
-- una ensalada de x kilos aporta la mitad de peso para la persona y no agrega colesterol
+- una ensalada de x kilos aporta la mitad de peso para la persona y no agrega colesterol. Por ejemplo: una ensalada de 6 kilos le aporta 3 kg. extra de peso a una persona.
 - cada hamburguesa tiene una cantidad de ingredientes: el colesterol aumenta un 50% para la persona y lo hace engordar en (3 * la cantidad de ingredientes) kilos
 - la palta aumenta 2 kilos a quien la consume (el colesterol que aporta es despreciable)
 
@@ -91,15 +91,17 @@ comer (Hamburguesa ingredientes) persona = persona {
   colesterol = colesterol persona * 1.5
 }
 
-comer (Palta) persona = persona {
+comer Palta persona = persona {
   peso = peso persona + 2
 }
 ```
 
 #### ¿Ventajas?
+
 Separamos aquí el dato comida vs. la acción de comer. Tenemos información sobre la comida (kilos, ingredientes), podemos comparar las comidas, e incluso tener acciones diferentes (comer, endulzar, mejorar, etc.)
 
 #### ¡Quiero mi menú!
+
 Podemos tener una lista de comidas también: 
 
 ```hs

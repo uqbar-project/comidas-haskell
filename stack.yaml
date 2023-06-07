@@ -18,7 +18,7 @@
 #
 # resolver: ./custom-snapshot.yaml
 # resolver: https://example.com/snapshots/2018-01-01.yaml
-resolver: lts-18.14
+resolver: lts-20.10
 
 # User packages to be built.
 # Various formats can be used as shown in the example below.
@@ -41,7 +41,7 @@ ghc-options:
 
 extra-deps:
 - git: https://github.com/10Pines/pdepreludat.git
-  commit: 7c89e5d9171c6e9233c2b3592bc66696587b87e1
+  commit: 42dc3aa1ff1ff1726939bdb24010b0017853706c
 
 # Dependency packages to be pulled from upstream that are not in the resolver
 # using the same syntax as the packages field.
