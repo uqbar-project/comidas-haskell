@@ -73,10 +73,10 @@ repetir comida = comida.comida
 -- Necesitamos nuevas funciones para disfrutar cada comida 
 -- (tal vez convenga renombrar las anteriores, x ej comerEnsalada en vez de ensalada)
 disfrutarEnsalada :: Kilos -> Persona -> Bool
-disfrutarEnsalada kilos alguien = sobrepeso alguien || kilos > 1
+disfrutarEnsalada kilos alguien = pesoPar alguien || kilos > 1
 
 disfrutarHamburguesa :: [Ingrediente] -> Persona -> Bool
-disfrutarHamburguesa ingredientes alguien = sobrepeso alguien || elem "cheddar" ingredientes
+disfrutarHamburguesa ingredientes alguien = pesoPar alguien || elem "cheddar" ingredientes
 
 disfrutarPalta:: Persona -> Bool
 disfrutarPalta _ = True
@@ -326,7 +326,7 @@ siempreSabroso _ = True
 -- Para quienes pesan una cantidad par, todas las comidas son disfrutadas, 
 -- para los demás, solo son disfrutadas las comidas sabrosas
 disfrutar''' :: Comida''' -> Persona -> Bool
-disfrutar''' comida alguien = sobrepeso alguien || sabrosa''' comida
+disfrutar''' comida alguien = pesoPar alguien || sabrosa''' comida
 
 --Nuevas formas de comer
 comidaLigth::FormaDeComer
