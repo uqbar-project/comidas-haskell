@@ -2,6 +2,10 @@
 
 [![build](https://github.com/uqbar-project/comidas-haskell/actions/workflows/build.yml/badge.svg)](https://github.com/uqbar-project/comidas-haskell/actions/workflows/build.yml)
 
+## Video explicativo
+
+Podés ver la explicación de este ejercicio en [Youtube](https://www.youtube.com/watch?v=CKa31tOnwJM)
+
 ## Enunciado
 
 Definimos una persona en base a indicadores nutricionales como el nivel de colesterol y su peso:
